@@ -25,4 +25,25 @@ public class ArvoreBin {
         }
     }
 
+    public void inOrdem(NoAbin raiz) {
+        if (raiz != null) {
+            inOrdem(raiz.esquerda);
+            System.out.println(raiz.info);
+            inOrdem(raiz.direita);
+        }
+    }
+
+    public NoAbin busca(int valor) {
+        NoAbin p = this.raiz;
+
+        while (p != null && p.info != valor) {
+            if (valor < p.info) {
+                p = p.esquerda;
+            } else {
+                p = p.direita;
+            }
+        }
+        return p;
+    }
+
 }
