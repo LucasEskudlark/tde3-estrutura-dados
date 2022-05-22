@@ -1,9 +1,9 @@
-public class NoAbin {
-    public NoAbin esquerda;
-    public NoAbin direita;
+public class NoAVL {
+    public NoAVL esquerda;
+    public NoAVL direita;
     public int info;
 
-    public NoAbin(int valor) {
+    public NoAVL(int valor) {
         this.info = valor;
         this.esquerda = null;
         this.direita = null;

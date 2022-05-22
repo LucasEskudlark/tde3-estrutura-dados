@@ -1,18 +1,18 @@
 public class ArvoreBin {
-    public NoAbin raiz;
+    public NoAVL raiz;
 
     public ArvoreBin(){
         this.raiz = null;
     }
 
-    public void insere(int valor) {
-        NoAbin novo = new NoAbin(valor);
+    public void insereElemento(int valor) {
+        NoAVL novo = new NoAVL(valor);
         // Se a raiz for nula, o novo elemento vira a raiz
         if (this.raiz == null) {
             this.raiz = novo;
         } else {
-            NoAbin p = this.raiz;
-            NoAbin q = null;
+            NoAVL p = this.raiz;
+            NoAVL q = null;
             // Enquanto p for diferente de nulo, inserir na direita ou na esquerda
             while (p != null) {
                 q = p;
@@ -22,43 +22,106 @@ public class ArvoreBin {
                     p = p.direita;
                 }
             }
+            if (valor < q.info) {
+                q.esquerda = novo;
+            } else {
+                q.direita = novo;
+            }
+
         }
     }
 
-    public void inOrdem(NoAbin raiz) {
-        if (raiz != null) {
-            inOrdem(raiz.esquerda);
-            System.out.println(raiz.info);
-            inOrdem(raiz.direita);
+    public NoAVL removeElemento(NoAVL raiz, int elemento){
+        // Se for nula e fim da recursiva
+        if(raiz == null){
+            return raiz;
         }
-    }
-    public void preOrdem(NoAbin raiz){
-        if (raiz != null){
-            System.out.println(raiz.info);
-            preOrdem(raiz.esquerda);
-            preOrdem(raiz.direita);
+        // Seguir pelo lado esquerdo da subarvore até o elemento ser menor que o valor do nó
+        else if(raiz.info > elemento){
+            raiz.esquerda = removeElemento(raiz.esquerda, elemento);
         }
+        // Seguir pelo lado esquerdo da subarvore até o elemento ser maior que o valor do nó
+        else if(raiz.info < elemento){
+            raiz.direita = removeElemento(raiz.direita, elemento);
+        }
+        else{
+            /*Três casos a serem lidados: Elemento com nenhuma sub-arvore,
+            apenas uma sub-arvore ou duas sub-arvores*/
+
+            // Lidando com a situação caso o elemento tenha uma ou nenhuma sub-arvore
+            if(raiz.esquerda == null){
+                return raiz.direita;
+            }
+            else if(raiz.direita == null){
+                return raiz.esquerda;
+            }
+
+            /* Lidando com a situação caso o elemento tenha duas sub-arvores
+            Encontrar o mínimo elemento seguindo a sub-arvore da direita e aplicar
+            o método removeElemento() novamente */
+            raiz.info = encontraMinimo(raiz.direita);
+
+            raiz.direita= removeElemento(raiz.direita, raiz.info);
+        }
+        return raiz;
     }
 
-    public void posOrdem(NoAbin raiz){
-        if (raiz != null){
-            posOrdem(raiz.esquerda);
-            posOrdem(raiz.direita);
-            System.out.println(raiz.info);
+    private int encontraMinimo(NoAVL no){
+        // Assumindo o minimo como o valor informado
+        int minimo = no.info;
+
+        while(no.esquerda != null){
+            minimo = no.esquerda.info;
+            no = no.esquerda;
         }
+        return minimo;
     }
 
-    public NoAbin busca(int valor) {
-        NoAbin p = this.raiz;
+    public NoAVL existeElemento(int elemento) {
+        NoAVL p = this.raiz;
 
-        while (p != null && p.info != valor) {
-            if (valor < p.info) {
+        while (p != null && p.info != elemento) {
+            if (elemento < p.info) {
                 p = p.esquerda;
             } else {
                 p = p.direita;
             }
         }
         return p;
+    }
+
+    public int altura(NoAVL raiz) {
+        if (raiz == null) {
+            return 0;
+        } else {
+            int alturaEsquerda = altura(raiz.esquerda);
+            int alturaDireita = altura(raiz.direita);
+
+            return Math.max(alturaDireita, alturaEsquerda) + 1;
+        }
+    }
+
+    public void imprimeInOrdem(NoAVL raiz) {
+        if (raiz != null) {
+            imprimeInOrdem(raiz.esquerda);
+            System.out.println(raiz.info);
+            imprimeInOrdem(raiz.direita);
+        }
+    }
+    public void imprimePreOrdem(NoAVL raiz){
+        if (raiz != null){
+            System.out.println(raiz.info);
+            imprimePreOrdem(raiz.esquerda);
+            imprimePreOrdem(raiz.direita);
+        }
+    }
+
+    public void imprimePosOrdem(NoAVL raiz){
+        if (raiz != null){
+            imprimePosOrdem(raiz.esquerda);
+            imprimePosOrdem(raiz.direita);
+            System.out.println(raiz.info);
+        }
     }
 
 }
