@@ -32,6 +32,21 @@ public class ArvoreBin {
             inOrdem(raiz.direita);
         }
     }
+    public void preOrdem(NoAbin raiz){
+        if (raiz != null){
+            System.out.println(raiz.info);
+            preOrdem(raiz.esquerda);
+            preOrdem(raiz.direita);
+        }
+    }
+
+    public void posOrdem(NoAbin raiz){
+        if (raiz != null){
+            posOrdem(raiz.esquerda);
+            posOrdem(raiz.direita);
+            System.out.println(raiz.info);
+        }
+    }
 
     public NoAbin busca(int valor) {
         NoAbin p = this.raiz;
