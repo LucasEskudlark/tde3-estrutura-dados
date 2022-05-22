@@ -124,4 +124,60 @@ public class ArvoreBin {
         }
     }
 
+    public int balanceamento(NoAVL raiz){
+       return altura(raiz.direita) - altura(raiz.esquerda);
+    }
+
+    public NoAVL pai(NoAVL no){
+        NoAVL noAtual = this.raiz;
+        if (no == this.raiz){
+            return raiz;
+        }
+        while(noAtual != null){
+            if (no == noAtual.esquerda || no == noAtual.direita){
+                break;
+            }
+            else if (no.info < noAtual.info){
+                noAtual = noAtual.esquerda;
+            }
+            else{
+                noAtual = noAtual.direita;
+            }
+        }
+        return noAtual;
+    }
+
+    private void rotacaoEsquerda(NoAVL no){
+        NoAVL raiz = pai(no);
+        NoAVL p = no.direita;
+
+        if (no == this.raiz){
+            this.raiz = p;
+        }
+        else if (raiz.info <= p.info){
+            raiz.direita = p;
+        }
+        else{
+            raiz.esquerda = p;
+        }
+        no.direita = p.esquerda;
+        p.esquerda = no;
+    }
+
+    private void rotacaoDireita(NoAVL no){
+        NoAVL raiz = pai(no);
+        NoAVL p = no.esquerda;
+
+        if (no == this.raiz){
+            this.raiz = p;
+        }
+        else if (raiz.info <= p.info){
+            raiz.direita = p;
+        }
+        else{
+            raiz.esquerda = p;
+        }
+        no.esquerda = p.direita;
+        p.direita = no;
+    }
 }
