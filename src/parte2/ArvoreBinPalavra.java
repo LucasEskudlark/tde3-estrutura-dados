@@ -49,5 +49,13 @@ public class ArvoreBinPalavra {
             }
         } // Fim do while
     } // Fim do método
+
+    public void imprimeInOrdem(NoAVL raiz) {
+        if (raiz != null) {
+            imprimeInOrdem(raiz.esquerda);
+            System.out.println(raiz.palavra);
+            imprimeInOrdem(raiz.direita);
+        }
+    }
 } // Fim da classe
 
