@@ -1,3 +1,5 @@
+package parte1;
+
 public class ArvoreBin {
     public NoAVL raiz;
 

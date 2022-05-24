@@ -1,2 +1,12 @@
-package parte2;public class Main {
+package parte2;
+import java.io.*;
+
+public class Main {
+    public static void main(String[] args) {
+
+        String inputFileName; // Caminho do arquivo
+
+
+
+    }
 }

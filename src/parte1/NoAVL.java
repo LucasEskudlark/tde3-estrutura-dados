@@ -1,3 +1,5 @@
+package parte1;
+
 public class NoAVL {
     public NoAVL esquerda;
     public NoAVL direita;
