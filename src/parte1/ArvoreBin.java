@@ -15,7 +15,7 @@ public class ArvoreBin {
         } else {
             NoAVL p = this.raiz;
             NoAVL q = null;
-            // Enquanto p for diferente de nulo, inserir na direita ou na esquerda
+            // Enquanto p for diferente de nulo, inserir na direita, se for menor, ou na esquerda, se for maior
             while (p != null) {
                 q = p;
                 if (valor < p.info) {
@@ -104,6 +104,7 @@ public class ArvoreBin {
     }
 
     public void imprimeInOrdem(NoAVL raiz) {
+        //Percorre a sua subárvore esquerda em in-ordem, Vista a raiz, Percorre a sua subárvore direita em in-ordem.
         if (raiz != null) {
             imprimeInOrdem(raiz.esquerda);
             System.out.println(raiz.info);
@@ -111,7 +112,9 @@ public class ArvoreBin {
         }
     }
     public void imprimePreOrdem(NoAVL raiz){
+        //Vista a raiz, Percorre a sua subárvore esquerda em pré-ordem, Percorre a sua subárvore direita em pré-ordem.
         if (raiz != null){
+
             System.out.println(raiz.info);
             imprimePreOrdem(raiz.esquerda);
             imprimePreOrdem(raiz.direita);
@@ -119,6 +122,7 @@ public class ArvoreBin {
     }
 
     public void imprimePosOrdem(NoAVL raiz){
+        //Percorre a sua subárvore esquerda em pós-ordem, Percorre a sua subárvore direita em pós-ordem, Vista a raiz.
         if (raiz != null){
             imprimePosOrdem(raiz.esquerda);
             imprimePosOrdem(raiz.direita);
@@ -128,6 +132,7 @@ public class ArvoreBin {
 
     public int balanceamento(NoAVL raiz){
        return altura(raiz.direita) - altura(raiz.esquerda);
+       //calculo de altura para rotacionar
     }
 
     public NoAVL pai(NoAVL no){
