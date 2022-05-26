@@ -21,6 +21,7 @@ public class ArvoreBinPalavra {
         while (true) {
             if ( novaPalavra.equals(atual.palavra)) {
                 // A palavra já está na árvore, apenas retorna
+                atual.contador += 1;
                 return;
             }
             if ( novaPalavra.compareTo(atual.palavra) < 0) {
@@ -49,6 +50,7 @@ public class ArvoreBinPalavra {
             }
         } // Fim do while
     } // Fim do método
+
 
     public void imprimeInOrdem(NoAVL raiz) {
         if (raiz != null) {
